@@ -1,0 +1,1 @@
+So this folder contains the information related with database connection like Database Host, database name and methods etc and we export it.

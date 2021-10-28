@@ -1,0 +1,1 @@
+This Middleware folder contains gaurds/middlewares which can have control over req, response.

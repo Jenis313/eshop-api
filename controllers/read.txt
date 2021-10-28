@@ -1,0 +1,1 @@
+This folder contains C part of MVC that means controllers  for all the routes. Like if there is a route called '/auth', '/users' etc. than those requests will be handled through this folder so that our codebase becomes a lot more cleaner and readable. We use Routing level middlewares to handle those individual routes and routing level middlewares work as mini application.

@@ -1,0 +1,1 @@
+Helpers contains files which contains function and the function contains some part of code that is duplicated in different places. And we export the function from here and the function can be called wherever the code is duplicated. 
