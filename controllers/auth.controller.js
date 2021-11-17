@@ -42,7 +42,7 @@ router.post('/login', (req, res, next) => {
         //res end
         if(!user){
             return next({
-                msg: 'Invalid Username',
+                msg: 'Invalid Username!!!',
                 status: 400
             })
         }
@@ -103,7 +103,7 @@ router.post('/register', Uploader.single('image')/*review concept section on top
     newMappedUser.password = passwordHash.generate(req.body.password);//hashing password before saving
     newMappedUser.save((err, result) => {
         if(err){
-            console.log("failed");
+            console.log("failed", err);
             return next(err);
         }
         res.json(result);

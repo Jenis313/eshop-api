@@ -4,6 +4,7 @@ const PORT = 4070;
 const app = express(); //all the express is accessed through this app variable now.
 const morgan = require('morgan'); //load third party md
 const path = require('path');
+const cors = require('cors');
 
 require('./db_init')
 //This is like writing db_init js here to make code more cleaner we write it into another place and just require here. We don't save it into any other variables like we do other requires because we haven't imported it. 
@@ -14,7 +15,8 @@ require('./db_init')
 //Load third party middleware
 app.use(morgan('dev'));
 
-
+// user cors middleware
+app.use(cors())
 
 app.use(express.urlencoded(
     
@@ -26,6 +28,7 @@ app.use(express.urlencoded(
         extended: true
     }
 ))
+app.use(express.json());
 app.use('/api', require('./routes/api.routes')) //Loading all the routes(api)
 
 // //serve static files
@@ -52,6 +55,7 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     //This is error handling middleware
     console.log("I'm error handling middleware");
+    res.status(err.status || 400)
     res.json({
         text: 'Error handling middleware',
         msg : err.msg || err,
