@@ -28,16 +28,16 @@ To use this web app simply visit the localhost at same port where this app is li
 Baseurl : http://localhost:{YOUR_PORT}/api/
 
 Endpoints: 
-<br>
+<br/>
 <b>Auth</b>
 - Login : auth/login(POST)
 - Register : auth/register(POST)
-<br>
+<br/>
 <b>Users</b>
 - Get users : users(GET)
 - Delete user : users/{id}(DELETE)
 - Update user : users/{id}(PUT)
-<br>
+<br/>
 <b>Product</b>
 - Add product: product(POST) - authentication needed
 - Fetch all products: product(GET) - authentication needed
