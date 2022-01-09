@@ -32,12 +32,16 @@ Endpoints:
 <b>Auth</b>
 - Login : auth/login(POST)
 - Register : auth/register(POST)
+
 <br/>
+
 <b>Users</b>
 - Get users : users(GET)
 - Delete user : users/{id}(DELETE)
 - Update user : users/{id}(PUT)
+
 <br/>
+
 <b>Product</b>
 - Add product: product(POST) - authentication needed
 - Fetch all products: product(GET) - authentication needed
