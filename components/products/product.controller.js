@@ -1,4 +1,9 @@
 const productQuery = require('./product.query');
+
+function getImageName(imgUrl){
+    return imgUrl.split('images/')[1]
+}
+
 function get(req, res, next){
     console.log('Hi from get data middleware')
     const condition = {}
@@ -75,6 +80,18 @@ function update(req, res, next){
     }
     console.log('data is ==> ',data)
     //todo prepare data
+
+    delete data.images; //to avoid if statement in query
+
+    // console.log('files to remove --> ', data.filesToRemove);
+
+    // convert strings to array
+    const filesToRemove = data.filesToRemove.split(',').map((item) => {
+        return getImageName(item);
+    })
+
+    data.filesToRemove = filesToRemove;
+
     productQuery
     .update(req.params.id, data)
     .then((data) => {

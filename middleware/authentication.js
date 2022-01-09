@@ -11,12 +11,13 @@ const UserModel = require('./../models/user.model');
 
 module.exports = function(req,res,next){
     let token;
-    if(req.headers['authorization'])
+    if (req.headers['authorization'])
         token = req.headers['authorization']
-    if(req.headers['x-access-token'])
-        token = req.headers['x-access-token'];
-    if(req.query['token'])
+    if (req.headers['x-access-token'])
+        token = req.headers['x-access-token']
+    if (req.query['token'])
         token = req.query['token']
+
     
     if(!token){
         return next({

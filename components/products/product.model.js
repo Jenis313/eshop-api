@@ -57,14 +57,14 @@ const ProductSchema = new Schema({
     images:[String],
     sku: Number,
     rating: Number,
-    stock_quantxity: Number,
+    stock_quantity: Number,
     status: {
         type: String,
         enum: ['available', 'out-of-stock', 'booked'],
         default: 'available'
     },
     reviews: [reviewSchema],
-    menuDate: Date,
+    manuDate: Date,
     expiryDate: Date,
     purchasedDate: Date,
     salesDate: Date,

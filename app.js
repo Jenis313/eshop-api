@@ -5,6 +5,8 @@ const app = express(); //all the express is accessed through this app variable n
 const morgan = require('morgan'); //load third party md
 const path = require('path');
 const cors = require('cors');
+// user cors middleware
+app.use(cors())
 
 require('./db_init')
 //This is like writing db_init js here to make code more cleaner we write it into another place and just require here. We don't save it into any other variables like we do other requires because we haven't imported it. 
@@ -15,8 +17,7 @@ require('./db_init')
 //Load third party middleware
 app.use(morgan('dev'));
 
-// user cors middleware
-app.use(cors())
+
 
 app.use(express.urlencoded(
     
@@ -31,9 +32,10 @@ app.use(express.urlencoded(
 app.use(express.json());
 app.use('/api', require('./routes/api.routes')) //Loading all the routes(api)
 
-// //serve static files
-// app.use(express.static('uploads'));
-// app.use('/file', express.static('uploads'));
+// serve static files  
+// app.use(express.static('uploads')) // serve for internal usage
+app.use('/file', express.static(path.join(process.cwd(), 'uploads'))) // serve for external request
+
 
 
 //Error handling middleware

@@ -1,3 +1,6 @@
+const fs = require('fs')
+const path = require('path')
+
 //Related with only core database tasks of product
 
 const ProductModel = require('./product.model');
@@ -10,8 +13,8 @@ const map_product_req = function(productData, product){
         product.category = productData.category;
     if(productData.description)
         product.description = productData.description;
-    if(productData.qualtity)
-        product.qualtity = productData.qualtity;
+    if(productData.quantity)
+        product.quantity = productData.quantity;
     if(productData.modelNo)
         product.modelNo = productData.modelNo;
     if(productData.color)
@@ -39,7 +42,7 @@ const map_product_req = function(productData, product){
     if(productData.expiryDate)
         product.expiryDate = productData.expiryDate;
     if(productData.purchasedDate)
-        product.purchasedDate = productData.purchaseDate;
+        product.purchasedDate = productData.purchasedDate;
     if(productData.salesDate)
         product.salesDate = productData.salesDate;
     if(productData.isReturnEligible)
@@ -83,7 +86,7 @@ function map_review_data(reviewData, review){
 function find(condition){
     return new Promise((resolve, reject) => {
         ProductModel
-        .find(condition, {name:1, vendor:1, _id: 1, token:1, reviews: 1 /*THis is just projection part and it is optional*/})
+        .find(condition, {/*name:1, vendor:1, _id: 1, token:1, reviews: 1 */ /*THis is just projection part and it is optional*/})
         .sort({
             _id: -1
         })
@@ -107,6 +110,8 @@ function insert(data){//This 'data' is 'req.body'
 
 }
 function update(id, data){
+
+    console.log('filest to remove --> ', data.filesToRemove)
     return new Promise((resolve, reject) => {
         ProductModel
         .findById(id, (err, product) => {
@@ -121,9 +126,22 @@ function update(id, data){
             }
             //if product found Update
             map_product_req(data, product)
+
             if(data.newImages){
                 //In here we can't directly update data.images it just replace previous one but if we create data.newImages in the controller and put the update images into that we can concat that array with the existing array(product.images)
                 product.images = product.images.concat(data.newImages);
+            }
+
+            // remove if there is any data in filesToRemove
+            if(data.filesToRemove&&data.filesToRemove.length){
+                // 1st remove from product images
+                // remove from server
+                product.images.forEach(function(item, index){
+                    if(data.filesToRemove.includes(item)){
+                        product.images.splice(index, 1);
+                        removeFileFromServer(item);
+                    }
+                })
             }
             product.save((err, updated) => {
                 if(err){
@@ -164,6 +182,16 @@ function addReview(productId, reviewData){
         })
     })
 }
+
+// cleanup
+function removeFileFromServer(filename){
+    fs.unlink(path.join(process.cwd(), 'uploads/images/' + filename), (err, removed) => {
+        if(!err){
+            console.log('file removed from server!');
+        }
+    })
+}
+
 module.exports = {
     //We are using object shorthands here
     find,
