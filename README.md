@@ -23,24 +23,26 @@ To run this project on your machine
 - rename dbName variable if you want to change database name, and if you like to use different port change PORT variable in app.js
 
 ## 🎈 Usage <a name="usage"></a>
+
 To use this web app simply visit the localhost at same port where this app is listening. 
 Baseurl : http://localhost:{YOUR_PORT}/api/
+
 Endpoints: 
 <b>Auth</b>
--Login : auth/login(POST)
--Register : auth/register(POST)
+- Login : auth/login(POST)
+- Register : auth/register(POST)
 <b>Users</b>
--Get users : users(GET)
--Delete user : users/{id}(DELETE)
--Update user : users/{id}(PUT)
+- Get users : users(GET)
+- Delete user : users/{id}(DELETE)
+- Update user : users/{id}(PUT)
 <b>Product</b>
--Add product: product(POST) - authentication needed
--Fetch all products: product(GET) - authentication needed
--Fetch single products: product/{id}(GET)
--Search all products: product/search(GET)
--Remove product: product/{id}(DELETE) - authentication needed
--Update product: product/{id}(PUT) - authentication needed
--Add review: product/add_review/{id}(POST) - authentication needed
+- Add product: product(POST) - authentication needed
+- Fetch all products: product(GET) - authentication needed
+- Fetch single products: product/{id}(GET)
+- Search all products: product/search(GET)
+- Remove product: product/{id}(DELETE) - authentication needed
+- Update product: product/{id}(PUT) - authentication needed
+- Add review: product/add_review/{id}(POST) - authentication needed
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 - [Express](https://expressjs.com/) - Server Framework
